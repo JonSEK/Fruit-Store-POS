@@ -1,0 +1,21 @@
+import express from "express";
+import connectDB from "./config/db.js";
+import fruitRouter from "./routes/fruits.js";
+import purchaseRouter from "./routes/purchase.js";
+import cors from "cors";
+
+const port = process.env.PORT;
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use("/api", fruitRouter);
+app.use("/api/purchase", purchaseRouter);
+
+
+connectDB();
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
