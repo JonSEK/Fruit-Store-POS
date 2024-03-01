@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Login from "./Login";
 
 function Header() {
@@ -27,13 +27,19 @@ function Header() {
     setIsLoggedIn(false);
   };
 
+  const location = useLocation();
+  const isInventoryPage = location.pathname === "/inventory";
+
   return (
     <header className="flex justify-between items-center p-4">
       <h1 className="text-3xl">Staff: {isLoggedIn ? staffName : "Guest"}</h1>
       <p className="text-3xl">Time: {currentTime.toLocaleTimeString()}</p>
       <nav>
-        <Link to="/inventory" className="text-blue-500 hover:text-blue-800">
-          Inventory
+        <Link
+          to={isInventoryPage ? "/" : "/inventory"}
+          className="text-blue-500 hover:text-blue-800"
+        >
+          {isInventoryPage ? "Home" : "Inventory"}
         </Link>
       </nav>
       <Login

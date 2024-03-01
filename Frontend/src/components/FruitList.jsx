@@ -12,9 +12,9 @@ function FruitList() {
   }, []);
 
   return (
-    <ul>
+    <ul className="flex flex-wrap justify-center">
       {fruits.map((fruit, index) => (
-        <Fruit key={index} name={fruit.name} />
+        <Fruit key={index} name={fruit.name} price={fruit.price} />
       ))}
     </ul>
   );
