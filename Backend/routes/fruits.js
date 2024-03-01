@@ -10,8 +10,8 @@ router.get("/fruits", async (req, res) => {
 
 router.post("/fruits", async (req, res) => {
   const fruit = new Fruit(req.body);
-  await fruit.save();
-  res.status(201).send();
+  const savedFruit = await fruit.save();
+  res.status(201).json(savedFruit);
 });
 
 router.delete("/fruits/:id", async (req, res) => {

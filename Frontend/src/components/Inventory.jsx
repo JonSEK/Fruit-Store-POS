@@ -10,57 +10,35 @@ function Inventory() {
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/fruits")
-      .then((res) => {
-        console.log(res.data);
-        setInventory(res.data);
-      })
+      .then((res) => setInventory(res.data))
       .catch((err) => console.error(err));
   }, []);
 
-  const handleDelete = (_id) => {
+  // Delete fruit from server and update local state
+  const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/api/fruits/${_id}`)
-      .then((res) => {
-        console.log(res.data);
-        // Update local inventory state
-        setInventory((prevInventory) =>
-          prevInventory.filter((item) => item._id !== _id)
-        );
-      })
+      .delete(`http://localhost:3001/api/fruits/${id}`)
+      .then(() =>
+        setInventory((prev) => prev.filter((fruit) => fruit._id !== id))
+      )
       .catch((err) => console.error(err));
   };
 
-  const handleNameChange = (newName, _id) => {
-    setInventory((prevInventory) =>
-      prevInventory.map((fruit) =>
-        fruit._id === _id ? { ...fruit, name: newName } : fruit
+  // Update fruit on server and local state
+  const handleUpdate = (id, updatedFruit) => {
+    axios
+      .put(`http://localhost:3001/api/fruits/${id}`, updatedFruit)
+      .then((res) =>
+        setInventory((prev) =>
+          prev.map((fruit) => (fruit._id === id ? res.data : fruit))
+        )
       )
-    );
+      .catch((err) => console.error(err));
   };
 
-  const handlePriceChange = (newPrice, _id) => {
-    setInventory((prevInventory) =>
-      prevInventory.map((fruit) =>
-        fruit._id === _id ? { ...fruit, price: newPrice } : fruit
-      )
-    );
-  };
-
+  // Save all changes and exit edit mode
   const handleSaveAll = () => {
-    inventory.forEach((fruit) => {
-      const updatedFruit = {
-        name: fruit.name,
-        price: Number(fruit.price),
-      };
-
-      axios
-        .put(`http://localhost:3001/api/fruits/${fruit._id}`, updatedFruit)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => console.error(err));
-    });
-
+    inventory.forEach((fruit) => handleUpdate(fruit._id, fruit));
     setIsEditMode(false);
   };
 
@@ -69,9 +47,7 @@ function Inventory() {
       <AddFruitForm setInventory={setInventory} />
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="flex justify-between items-center">
-          <h2 className="mb-6 text-2xl font-bold">
-            Current Inventory
-          </h2>
+          <h2 className="mb-6 text-2xl font-bold">Current Inventory</h2>
           <button
             onClick={isEditMode ? handleSaveAll : () => setIsEditMode(true)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
@@ -96,7 +72,10 @@ function Inventory() {
                       type="text"
                       value={fruit.name}
                       onChange={(e) =>
-                        handleNameChange(e.target.value, fruit._id)
+                        handleUpdate(fruit._id, {
+                          ...fruit,
+                          name: e.target.value,
+                        })
                       }
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
@@ -110,7 +89,10 @@ function Inventory() {
                       type="number"
                       value={fruit.price}
                       onChange={(e) =>
-                        handlePriceChange(e.target.value, fruit._id)
+                        handleUpdate(fruit._id, {
+                          ...fruit,
+                          price: e.target.value,
+                        })
                       }
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
