@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Fruit from "./Fruit";
 
-function FruitList() {
+function FruitList({ onFruitSelected }) {
   const [fruits, setFruits] = useState([]);
 
   useEffect(() => {
@@ -12,11 +12,11 @@ function FruitList() {
   }, []);
 
   return (
-    <ul className="flex flex-wrap justify-center">
+    <div className="flex flex-wrap justify-center">
       {fruits.map((fruit, index) => (
-        <Fruit key={index} name={fruit.name} price={fruit.price} />
+        <Fruit key={index} name={fruit.name} price={fruit.price} onFruitSelected={onFruitSelected} />
       ))}
-    </ul>
+    </div>
   );
 }
 
