@@ -17,7 +17,9 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
         (prevItems) =>
           prevItems
             .map((item) =>
-              item.id === id ? { ...item, quantity: newQuantity } : item
+              item.id === id && item.name !== selectedFruit
+                ? { ...item, quantity: newQuantity }
+                : item
             )
             .filter((item) => item.quantity !== 0) // Filter out items with quantity 0
       );
@@ -25,10 +27,10 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
   };
 
   // Define a reusable Row component to avoid repetition
-  const Row = ({ id, name, pricePerUnit, quantity }) => (
+  const Row = ({ id, name, pricePerUnit, quantity, selectedFruit }) => (
     <div className="flex justify-between text-xl">
       <div className="w-1/4 text-left">
-        {areItemsButtons && name !== selectedFruit ? (
+        {areItemsButtons && id !== selectedFruit.id ? (
           <button
             onClick={() => handleItemClick(id)}
             className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -68,7 +70,9 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
       ) : (
         items
           .filter((item) => item.name)
-          .map((item, index) => <Row key={index} {...item} />)
+          .map((item) => (
+            <Row key={item.id} {...item} selectedFruit={selectedFruit} />
+          ))
       )}
       {/* Render the row for the selected fruit */}
       {selectedFruit && (
@@ -76,6 +80,7 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
           name={selectedFruit}
           pricePerUnit={pricePerUnit}
           quantity={quantity}
+          selectedFruit={selectedFruit}
         />
       )}
       <div className="flex justify-between text-xl font-bold">
