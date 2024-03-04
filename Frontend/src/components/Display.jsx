@@ -43,7 +43,9 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
       </div>
       <div className="w-1/4 text-center">{quantity || 0}</div>
       <div className="w-1/4 text-center">{pricePerUnit}</div>
-      <div className="w-1/4 text-right">{pricePerUnit * (quantity || 0)}</div>
+      <div className="w-1/4 text-right">
+        {(pricePerUnit * (quantity || 0)).toFixed(2)}
+      </div>
     </div>
   );
 
@@ -85,7 +87,7 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
       )}
       <div className="flex justify-between text-xl font-bold">
         <div className="w-3/4 text-right">Grand Total</div>
-        <div className="w-1/4 text-right">{grandTotal}</div>
+        <div className="w-1/4 text-right">{grandTotal.toFixed(2)}</div>
       </div>
     </div>
   );

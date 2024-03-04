@@ -52,6 +52,13 @@ function Home() {
     setPricePerUnit(0);
   };
 
+  const handleCancelTransaction = () => {
+    setItems([]); // Clear all items
+    setSelectedFruit("Select item");
+    setQuantity(0);
+    setPricePerUnit(0);
+  };
+
   return (
     <div className="flex">
       <div className="flex-1">
@@ -72,6 +79,7 @@ function Home() {
           onQuantitySelected={handleQuantitySelected}
           onConfirm={handleConfirm}
           onClear={handleClear}
+          onCancelTransaction={handleCancelTransaction}
         />
       </div>
     </div>
