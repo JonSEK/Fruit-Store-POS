@@ -5,8 +5,9 @@ function NumberPad({
   onClear,
   onConfirm,
   onCancelTransaction,
-  onPayment,
   onNextTransaction,
+  isPaymentClicked,
+  setIsPaymentClicked,
 }) {
   const [input, setInput] = useState("");
 
@@ -39,10 +40,10 @@ function NumberPad({
   };
 
   const handlePaymentClick = () => {
-    onPayment();
     setInput("");
+    setIsPaymentClicked(!isPaymentClicked);
   };
-
+  
   const handleNextTransactionClick = () => {
     onNextTransaction();
     setInput("");
@@ -86,7 +87,9 @@ function NumberPad({
       </button>
       <button
         onClick={handlePaymentClick}
-        className="bg-green-500 text-white w-full h-12 rounded"
+        className={`bg-green-500 text-white w-full h-12 rounded ${
+          isPaymentClicked ? "clicked-class" : ""
+        }`}
       >
         Payment
       </button>

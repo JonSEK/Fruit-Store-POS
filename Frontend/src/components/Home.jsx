@@ -4,13 +4,13 @@ import Display from "./Display";
 import NumberPad from "./NumberPad";
 
 function Home() {
-  // Initialize state variables
   const [selectedFruit, setSelectedFruit] = useState("Select item");
   const [quantity, setQuantity] = useState(0);
   const [pricePerUnit, setPricePerUnit] = useState(0);
   const [items, setItems] = useState([]);
   const [collected, setCollected] = useState(0);
   const [change, setChange] = useState(0);
+  const [isPaymentClicked, setIsPaymentClicked] = useState(false);
 
   const handleFruitSelected = (fruitName, fruitPrice) => {
     setSelectedFruit(fruitName);
@@ -22,7 +22,6 @@ function Home() {
   };
 
   const handleConfirm = () => {
-
     if (selectedFruit !== "Select item" && quantity > 0) {
       const newItem = {
         id: Date.now(),
@@ -64,12 +63,16 @@ function Home() {
           setItems={setItems}
           collected={collected}
           change={change}
+          isPaymentClicked={isPaymentClicked}
+          setIsPaymentClicked={setIsPaymentClicked}
         />
         <NumberPad
           onQuantitySelected={handleQuantitySelected}
           onConfirm={handleConfirm}
           onClear={handleClear}
           onCancelTransaction={handleCancelTransaction}
+          setIsPaymentClicked={setIsPaymentClicked}
+          isPaymentClicked={isPaymentClicked}
         />
       </div>
     </div>

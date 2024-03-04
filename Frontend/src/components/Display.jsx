@@ -8,6 +8,7 @@ function Display({
   setItems,
   collected,
   change,
+  isPaymentClicked,
 }) {
   const isEmpty = !selectedFruit && quantity === 0;
   const [areItemsButtons, setAreItemsButtons] = useState(false);
@@ -81,7 +82,7 @@ function Display({
           ))
       )}
 
-      {selectedFruit && (
+      {!isPaymentClicked && selectedFruit && (
         <Row
           name={selectedFruit}
           pricePerUnit={pricePerUnit}
