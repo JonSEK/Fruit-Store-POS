@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 
-function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
-  // Check if the selected fruit and quantity are empty
+function Display({
+  selectedFruit,
+  quantity,
+  pricePerUnit,
+  items,
+  setItems,
+  collected,
+  change,
+}) {
   const isEmpty = !selectedFruit && quantity === 0;
   const [areItemsButtons, setAreItemsButtons] = useState(false);
-  // Calculate the grand total
   const grandTotal = items.reduce(
     (total, item) => total + item.pricePerUnit * (item.quantity || 0),
     0
@@ -13,20 +19,18 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
   const handleItemClick = (id) => {
     const newQuantity = parseInt(prompt("Enter new quantity:"), 10);
     if (!isNaN(newQuantity)) {
-      setItems(
-        (prevItems) =>
-          prevItems
-            .map((item) =>
-              item.id === id && item.name !== selectedFruit
-                ? { ...item, quantity: newQuantity }
-                : item
-            )
-            .filter((item) => item.quantity !== 0) // Filter out items with quantity 0
+      setItems((prevItems) =>
+        prevItems
+          .map((item) =>
+            item.id === id && item.name !== selectedFruit
+              ? { ...item, quantity: newQuantity }
+              : item
+          )
+          .filter((item) => item.quantity !== 0)
       );
     }
   };
 
-  // Define a reusable Row component to avoid repetition
   const Row = ({ id, name, pricePerUnit, quantity, selectedFruit }) => (
     <div className="flex justify-between text-xl">
       <div className="w-1/4 text-left">
@@ -66,7 +70,7 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
         <div className="w-1/4 text-center">Price</div>
         <div className="w-1/4 text-right">Total</div>
       </div>
-      {/* Render the rows for the items */}
+
       {isEmpty ? (
         <Row name="" pricePerUnit={0} quantity={0} />
       ) : (
@@ -76,7 +80,7 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
             <Row key={item.id} {...item} selectedFruit={selectedFruit} />
           ))
       )}
-      {/* Render the row for the selected fruit */}
+
       {selectedFruit && (
         <Row
           name={selectedFruit}
@@ -85,9 +89,23 @@ function Display({ selectedFruit, quantity, pricePerUnit, items, setItems }) {
           selectedFruit={selectedFruit}
         />
       )}
-      <div className="flex justify-between text-xl font-bold">
-        <div className="w-3/4 text-right">Grand Total</div>
-        <div className="w-1/4 text-right">{grandTotal.toFixed(2)}</div>
+      <div className="text-xl font-bold">
+        <div className="flex justify-end mb-2 mt-4">
+          <div className="w-3/4 text-right">Grand Total</div>
+          <div className="w-1/4 text-right">{grandTotal.toFixed(2)}</div>
+        </div>
+        <div className="flex justify-end mb-2">
+          <div className="w-3/4 text-right">Collected</div>
+          <div className="w-1/4 text-right">
+            {collected ? collected.toFixed(2) : "0.00"}
+          </div>
+        </div>
+        <div className="flex justify-end mb-2">
+          <div className="w-3/4 text-right">Change</div>
+          <div className="w-1/4 text-right">
+            {change ? change.toFixed(2) : "0.00"}
+          </div>
+        </div>
       </div>
     </div>
   );
