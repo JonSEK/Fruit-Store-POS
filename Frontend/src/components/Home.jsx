@@ -26,7 +26,12 @@ function Home() {
     // Check if a fruit is selected and the quantity is greater than 0
     if (selectedFruit !== "Select item" && quantity > 0) {
       // If conditions are met, create a new item
-      const newItem = { name: selectedFruit, quantity, pricePerUnit };
+      const newItem = {
+        id: Date.now(),
+        name: selectedFruit,
+        quantity,
+        pricePerUnit,
+      };
 
       // Add the new item to the items array
       setItems((prevItems) => [...prevItems, newItem]);
@@ -60,6 +65,7 @@ function Home() {
           quantity={quantity}
           pricePerUnit={pricePerUnit}
           items={items}
+          setItems={setItems} // Pass setItems as a prop
         />
         {/* Number pad for selecting quantity */}
         <NumberPad
@@ -71,5 +77,4 @@ function Home() {
     </div>
   );
 }
-
 export default Home;
