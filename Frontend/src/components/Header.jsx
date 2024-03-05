@@ -33,7 +33,17 @@ function Header() {
   return (
     <header className="flex justify-between items-center p-4">
       <h1 className="text-3xl">Staff: {isLoggedIn ? staffName : "Guest"}</h1>
-      <p className="text-3xl">Time: {currentTime.toLocaleTimeString()}</p>
+      <p className="text-3xl">
+        {currentTime.toLocaleString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })}
+      </p>
       <nav>
         <Link
           to={isInventoryPage ? "/" : "/inventory"}
