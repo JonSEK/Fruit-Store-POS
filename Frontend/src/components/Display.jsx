@@ -48,7 +48,7 @@ function Display({
         )}
       </div>
       <div className="w-1/4 text-center">{quantity || 0}</div>
-      <div className="w-1/4 text-center">{pricePerUnit}</div>
+      <div className="w-1/4 text-center">{pricePerUnit.toFixed(2)}</div>
       <div className="w-1/4 text-right">
         {(pricePerUnit * (quantity || 0)).toFixed(2)}
       </div>
@@ -61,7 +61,7 @@ function Display({
         <h2 className="text-2xl font-bold">Point of Sale System</h2>
         <button
           onClick={() => setAreItemsButtons(!areItemsButtons)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
         >
           {areItemsButtons ? "Save" : "Change Qty"}
         </button>

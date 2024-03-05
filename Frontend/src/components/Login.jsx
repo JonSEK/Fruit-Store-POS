@@ -11,7 +11,7 @@ function Login({ onLogin, onLogout, isLoggedIn }) {
   return isLoggedIn ? (
     <button
       type="button"
-      className="bg-blue-500 text-white px-4 py-2 rounded"
+      className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
       onClick={handleLogout}
     >
       Log out
@@ -19,7 +19,7 @@ function Login({ onLogin, onLogout, isLoggedIn }) {
   ) : (
     <button
       type="button"
-      className="bg-blue-500 text-white px-4 py-2 rounded"
+      className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
       onClick={handleLogin}
     >
       Log in

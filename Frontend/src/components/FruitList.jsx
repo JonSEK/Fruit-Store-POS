@@ -12,7 +12,7 @@ function FruitList({ onFruitSelected }) {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
       {fruits.map((fruit) => (
         <Fruit key={fruit._id} fruit={fruit} onFruitSelected={onFruitSelected} />
       ))}

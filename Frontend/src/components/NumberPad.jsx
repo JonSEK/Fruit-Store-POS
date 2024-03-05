@@ -66,27 +66,27 @@ function NumberPad({
           key={number}
           value={number}
           onClick={handleButtonClick}
-          className="bg-blue-500 text-white w-full h-12 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white w-full h-12 rounded"
         >
           {number}
         </button>
       ))}
       <button
         onClick={handleBackspaceClick}
-        className="bg-yellow-500 text-white w-full h-12 rounded"
+        className="bg-yellow-500 hover:bg-yellow-700 text-white w-full h-12 rounded"
       >
         Backspace
       </button>
       <button
         onClick={handleClearClick}
-        className="bg-red-500 text-white w-full h-12 rounded"
+        className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
       >
         Clear
       </button>
       <button
         onClick={handleConfirmClick}
         disabled={isPaymentClicked}
-        className={`bg-green-500 text-white w-full h-12 rounded ${
+        className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
           isPaymentClicked ? "bg-gray-500" : ""
         }`}
       >
@@ -94,7 +94,7 @@ function NumberPad({
       </button>
       <button
         onClick={handlePaymentClick}
-        className={`bg-green-500 text-white w-full h-12 rounded ${
+        className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
           isPaymentClicked ? "clicked-class" : ""
         }`}
       >
@@ -102,14 +102,14 @@ function NumberPad({
       </button>
       <button
         onClick={handleCancelTransactionClick}
-        className="bg-red-500 text-white w-full h-12 rounded"
+        className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
       >
         Cancel Transaction
       </button>
 
       <button
         onClick={handleNextTransactionClick}
-        className="bg-blue-500 text-white w-full h-12 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white w-full h-12 rounded"
       >
         Next Transaction
       </button>
