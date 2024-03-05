@@ -13,8 +13,8 @@ function FruitList({ onFruitSelected }) {
 
   return (
     <div className="flex flex-wrap justify-center">
-      {fruits.map((fruit, index) => (
-        <Fruit key={index} name={fruit.name} price={fruit.price} onFruitSelected={onFruitSelected} />
+      {fruits.map((fruit) => (
+        <Fruit key={fruit._id} fruit={fruit} onFruitSelected={onFruitSelected} />
       ))}
     </div>
   );

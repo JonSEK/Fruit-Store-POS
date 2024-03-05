@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Login from "./Login";
 
-function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [staffName, setStaffName] = useState("");
+function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -16,16 +14,6 @@ function Header() {
       clearInterval(timer);
     };
   }, []);
-
-  const handleLogin = (name) => {
-    setStaffName(name);
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setStaffName("");
-    setIsLoggedIn(false);
-  };
 
   const location = useLocation();
   const isInventoryPage = location.pathname === "/inventory";
@@ -53,8 +41,8 @@ function Header() {
         </Link>
       </nav>
       <Login
-        onLogin={handleLogin}
-        onLogout={handleLogout}
+        onLogin={onLogin}
+        onLogout={onLogout}
         isLoggedIn={isLoggedIn}
       />
     </header>

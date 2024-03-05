@@ -54,7 +54,7 @@ function NumberPad({
     setIsPaymentClicked(!isPaymentClicked);
   };
 
-  const handleNextTransactionClick = () => {
+  const handleNextTransactionClick = async () => {
     onNextTransaction();
     setInput("");
   };

@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import FruitList from "./FruitList";
 import Display from "./Display";
 import NumberPad from "./NumberPad";
+import axios from "axios";
 
-function Home() {
+function Home({ staffName }) {
   const [selectedFruit, setSelectedFruit] = useState("Select item");
   const [quantity, setQuantity] = useState(0);
   const [pricePerUnit, setPricePerUnit] = useState(0);
+  const [selectedFruitId, setSelectedFruitId] = useState(null);
   const [items, setItems] = useState([]);
   const [collected, setCollected] = useState(0);
   const [isPaymentClicked, setIsPaymentClicked] = useState(false);
 
-  const handleFruitSelected = (fruitName, fruitPrice) => {
-    setSelectedFruit(fruitName);
-    setPricePerUnit(fruitPrice);
+  const handleFruitSelected = (fruit) => {
+    setSelectedFruit(fruit.name);
+    setPricePerUnit(fruit.price);
+    setSelectedFruitId(fruit._id);
   };
 
   const handleQuantitySelected = (quantity) => {
@@ -27,9 +30,11 @@ function Home() {
         name: selectedFruit,
         quantity,
         pricePerUnit,
+        _id: selectedFruitId,
       };
       setItems((prevItems) => [...prevItems, newItem]);
       setSelectedFruit("Select item");
+      setSelectedFruitId(null);
       setQuantity(0);
       setPricePerUnit(0);
     }
@@ -46,10 +51,34 @@ function Home() {
     setSelectedFruit("Select item");
     setQuantity(0);
     setPricePerUnit(0);
+    setIsPaymentClicked(false);
+    setCollected(0);
   };
 
   const handleCollectedChange = (newCollected) => {
     setCollected(newCollected);
+  };
+
+  const handleNextTransaction = async () => {
+    const totalPrice = items.reduce(
+      (total, item) => total + item.quantity * item.pricePerUnit,
+      0
+    );
+    try {
+      const response = await axios.post("http://localhost:3001/api/purchase", {
+        items: items,
+        totalPrice: totalPrice,
+        purchaseDate: new Date(),
+        staffName: staffName,
+      });
+
+      if (response.status === 201) {
+        console.log("Purchase saved successfully");
+      }
+    } catch (error) {
+      console.error("Error saving purchase:", error);
+    }
+    handleCancelTransaction();
   };
 
   return (
@@ -76,6 +105,7 @@ function Home() {
           setIsPaymentClicked={setIsPaymentClicked}
           isPaymentClicked={isPaymentClicked}
           onCollectedChange={handleCollectedChange}
+          onNextTransaction={handleNextTransaction}
         />
       </div>
     </div>
