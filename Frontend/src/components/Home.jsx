@@ -9,7 +9,6 @@ function Home() {
   const [pricePerUnit, setPricePerUnit] = useState(0);
   const [items, setItems] = useState([]);
   const [collected, setCollected] = useState(0);
-  const [change, setChange] = useState(0);
   const [isPaymentClicked, setIsPaymentClicked] = useState(false);
 
   const handleFruitSelected = (fruitName, fruitPrice) => {
@@ -49,6 +48,10 @@ function Home() {
     setPricePerUnit(0);
   };
 
+  const handleCollectedChange = (newCollected) => {
+    setCollected(newCollected);
+  };
+
   return (
     <div className="flex">
       <div className="flex-1">
@@ -62,7 +65,6 @@ function Home() {
           items={items}
           setItems={setItems}
           collected={collected}
-          change={change}
           isPaymentClicked={isPaymentClicked}
           setIsPaymentClicked={setIsPaymentClicked}
         />
@@ -73,6 +75,7 @@ function Home() {
           onCancelTransaction={handleCancelTransaction}
           setIsPaymentClicked={setIsPaymentClicked}
           isPaymentClicked={isPaymentClicked}
+          onCollectedChange={handleCollectedChange}
         />
       </div>
     </div>

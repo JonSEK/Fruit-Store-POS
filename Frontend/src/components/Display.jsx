@@ -7,7 +7,6 @@ function Display({
   items,
   setItems,
   collected,
-  change,
   isPaymentClicked,
 }) {
   const isEmpty = !selectedFruit && quantity === 0;
@@ -16,6 +15,8 @@ function Display({
     (total, item) => total + item.pricePerUnit * (item.quantity || 0),
     0
   );
+
+  const change = collected - grandTotal;
 
   const handleItemClick = (id) => {
     const newQuantity = parseInt(prompt("Enter new quantity:"), 10);

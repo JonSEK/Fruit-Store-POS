@@ -8,6 +8,7 @@ function NumberPad({
   onNextTransaction,
   isPaymentClicked,
   setIsPaymentClicked,
+  onCollectedChange,
 }) {
   const [input, setInput] = useState("");
 
@@ -18,8 +19,17 @@ function NumberPad({
   }, [input, onQuantitySelected]);
 
   const handleButtonClick = ({ target: { value } }) => {
-    setInput((prevInput) => prevInput + value);
+    setInput((prevInput) => {
+      const newInput = prevInput + value;
+      return newInput;
+    });
   };
+
+  useEffect(() => {
+    if (isPaymentClicked) {
+      onCollectedChange(parseFloat(input));
+    }
+  }, [input, isPaymentClicked, onCollectedChange]);
 
   const handleBackspaceClick = () =>
     setInput((prevInput) => prevInput.slice(0, -1) || "0");
@@ -43,7 +53,7 @@ function NumberPad({
     setInput("");
     setIsPaymentClicked(!isPaymentClicked);
   };
-  
+
   const handleNextTransactionClick = () => {
     onNextTransaction();
     setInput("");
@@ -75,15 +85,12 @@ function NumberPad({
       </button>
       <button
         onClick={handleConfirmClick}
-        className="bg-green-500 text-white w-full h-12 rounded col-span-2"
+        disabled={isPaymentClicked}
+        className={`bg-green-500 text-white w-full h-12 rounded ${
+          isPaymentClicked ? "bg-gray-500" : ""
+        }`}
       >
         Confirm
-      </button>
-      <button
-        onClick={handleCancelTransactionClick}
-        className="bg-red-500 text-white w-full h-12 rounded"
-      >
-        Cancel Transaction
       </button>
       <button
         onClick={handlePaymentClick}
@@ -93,6 +100,13 @@ function NumberPad({
       >
         Payment
       </button>
+      <button
+        onClick={handleCancelTransactionClick}
+        className="bg-red-500 text-white w-full h-12 rounded"
+      >
+        Cancel Transaction
+      </button>
+
       <button
         onClick={handleNextTransactionClick}
         className="bg-blue-500 text-white w-full h-12 rounded"
