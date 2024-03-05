@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FruitList from "./FruitList";
 import Display from "./Display";
 import NumberPad from "./NumberPad";
@@ -86,27 +86,31 @@ function Home({ staffName }) {
       <div className="flex-1">
         <FruitList onFruitSelected={handleFruitSelected} />
       </div>
-      <div className="flex-1">
-        <Display
-          selectedFruit={selectedFruit}
-          quantity={quantity}
-          pricePerUnit={pricePerUnit}
-          items={items}
-          setItems={setItems}
-          collected={collected}
-          isPaymentClicked={isPaymentClicked}
-          setIsPaymentClicked={setIsPaymentClicked}
-        />
-        <NumberPad
-          onQuantitySelected={handleQuantitySelected}
-          onConfirm={handleConfirm}
-          onClear={handleClear}
-          onCancelTransaction={handleCancelTransaction}
-          setIsPaymentClicked={setIsPaymentClicked}
-          isPaymentClicked={isPaymentClicked}
-          onCollectedChange={handleCollectedChange}
-          onNextTransaction={handleNextTransaction}
-        />
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1">
+          <Display
+            selectedFruit={selectedFruit}
+            quantity={quantity}
+            pricePerUnit={pricePerUnit}
+            items={items}
+            setItems={setItems}
+            collected={collected}
+            isPaymentClicked={isPaymentClicked}
+            setIsPaymentClicked={setIsPaymentClicked}
+          />
+        </div>
+        <div className="flex-1">
+          <NumberPad
+            onQuantitySelected={handleQuantitySelected}
+            onConfirm={handleConfirm}
+            onClear={handleClear}
+            onCancelTransaction={handleCancelTransaction}
+            setIsPaymentClicked={setIsPaymentClicked}
+            isPaymentClicked={isPaymentClicked}
+            onCollectedChange={handleCollectedChange}
+            onNextTransaction={handleNextTransaction}
+          />
+        </div>
       </div>
     </div>
   );

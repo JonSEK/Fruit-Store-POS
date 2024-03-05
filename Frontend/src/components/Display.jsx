@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function Display({
   selectedFruit,
@@ -56,7 +56,7 @@ function Display({
   );
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md">
+    <div className="bg-gray-800 text-white p-4 rounded-lg flex-grow">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">JON&apos;S FRUIT STALL</h2>
         <button
@@ -68,43 +68,45 @@ function Display({
       </div>
       <div className="flex justify-between text-xl font-bold mb-2">
         <div className="w-1/4 text-left">Item</div>
-        <div className="w-1/4 text-center">Quantity</div>
-        <div className="w-1/4 text-center">Price</div>
-        <div className="w-1/4 text-right">Total</div>
+        <div className="w-1/4 text-center pr-10">Quantity</div>
+        <div className="w-1/4 text-center pr-10">Price</div>
+        <div className="w-1/4 text-right pr-5">Total</div>
+      </div>
+      <div className="max-h-40 overflow-auto pr-5">
+        {isEmpty ? (
+          <Row name="" pricePerUnit={0} quantity={0} />
+        ) : (
+          items
+            .filter((item) => item.name)
+            .map((item) => (
+              <Row key={item.id} {...item} selectedFruit={selectedFruit} />
+            ))
+        )}
+
+        {!isPaymentClicked && selectedFruit && (
+          <Row
+            name={selectedFruit}
+            pricePerUnit={pricePerUnit}
+            quantity={quantity}
+            selectedFruit={selectedFruit}
+          />
+        )}
       </div>
 
-      {isEmpty ? (
-        <Row name="" pricePerUnit={0} quantity={0} />
-      ) : (
-        items
-          .filter((item) => item.name)
-          .map((item) => (
-            <Row key={item.id} {...item} selectedFruit={selectedFruit} />
-          ))
-      )}
-
-      {!isPaymentClicked && selectedFruit && (
-        <Row
-          name={selectedFruit}
-          pricePerUnit={pricePerUnit}
-          quantity={quantity}
-          selectedFruit={selectedFruit}
-        />
-      )}
       <div className="text-xl font-bold">
         <div className="flex justify-end mb-2 mt-4">
-          <div className="w-3/4 text-right">Grand Total</div>
-          <div className="w-1/4 text-right">{grandTotal.toFixed(2)}</div>
+          <div className="w-3/4 text-right pr-5 ">Grand Total</div>
+          <div className="w-1/4 text-right pr-5 ">{grandTotal.toFixed(2)}</div>
         </div>
-        <div className="flex justify-end mb-2">
-          <div className="w-3/4 text-right">Collected</div>
-          <div className="w-1/4 text-right">
+        <div className="flex justify-end mb-2 ">
+          <div className="w-3/4 text-right pr-5">Collected</div>
+          <div className="w-1/4 text-right pr-5">
             {collected ? collected.toFixed(2) : "0.00"}
           </div>
         </div>
         <div className="flex justify-end mb-2">
-          <div className="w-3/4 text-right">Change</div>
-          <div className="w-1/4 text-right">
+          <div className="w-3/4 text-right pr-5">Change</div>
+          <div className="w-1/4 text-right pr-5">
             {change ? change.toFixed(2) : "0.00"}
           </div>
         </div>

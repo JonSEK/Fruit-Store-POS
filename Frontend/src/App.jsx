@@ -20,22 +20,22 @@ function App() {
   };
 
   return (
-    <Router>
-      <Header
-        isLoggedIn={isLoggedIn}
-        staffName={staffName}
-        onLogin={handleLogin}
-        onLogout={handleLogout}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={<Home isLoggedIn={isLoggedIn} staffName={staffName} />}
+      <Router>
+        <Header
+          isLoggedIn={isLoggedIn}
+          staffName={staffName}
+          onLogin={handleLogin}
+          onLogout={handleLogout}
         />
-        <Route path="/inventory" element={<Inventory />} />
-        <Route path="/sales" element={<Sales />} />
-      </Routes>
-    </Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home isLoggedIn={isLoggedIn} staffName={staffName} />}
+          />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/sales" element={<Sales />} />
+        </Routes>
+      </Router>
   );
 }
 

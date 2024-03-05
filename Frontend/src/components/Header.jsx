@@ -21,8 +21,8 @@ function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
 
   return (
     <header className="flex justify-between items-center p-4">
-      <h1 className="text-3xl">Staff: {isLoggedIn ? staffName : "Guest"}</h1>
-      <p className="text-3xl">
+      <h1 className="text-2xl">Staff: {isLoggedIn ? staffName : "Guest"}</h1>
+      <p className="text-2xl">
         {currentTime.toLocaleString("en-GB", {
           day: "2-digit",
           month: "short",

@@ -12,9 +12,13 @@ function FruitList({ onFruitSelected }) {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
+    <div className="bg-slate-300 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 rounded-lg ">
       {fruits.map((fruit) => (
-        <Fruit key={fruit._id} fruit={fruit} onFruitSelected={onFruitSelected} />
+        <Fruit
+          key={fruit._id}
+          fruit={fruit}
+          onFruitSelected={onFruitSelected}
+        />
       ))}
     </div>
   );
