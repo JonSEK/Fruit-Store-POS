@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Inventory from "./components/Inventory";
 import Home from "./components/Home";
+import Sales from "./components/Sales";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,6 +33,7 @@ function App() {
           element={<Home isLoggedIn={isLoggedIn} staffName={staffName} />}
         />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/sales" element={<Sales />} />
       </Routes>
     </Router>
   );

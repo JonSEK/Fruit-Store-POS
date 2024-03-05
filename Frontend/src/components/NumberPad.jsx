@@ -60,59 +60,61 @@ function NumberPad({
   };
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-4">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."].map((number) => (
+    <div className="flex flex-col justify-end w-1/2 absolute bottom-0 right-0">
+      <div className="grid grid-cols-3 gap-4 p-4">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."].map((number) => (
+          <button
+            key={number}
+            value={number}
+            onClick={handleButtonClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white w-full h-12 rounded"
+          >
+            {number}
+          </button>
+        ))}
         <button
-          key={number}
-          value={number}
-          onClick={handleButtonClick}
+          onClick={handleBackspaceClick}
+          className="bg-yellow-500 hover:bg-yellow-700 text-white w-full h-12 rounded"
+        >
+          Backspace
+        </button>
+        <button
+          onClick={handleClearClick}
+          className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
+        >
+          Clear
+        </button>
+        <button
+          onClick={handleConfirmClick}
+          disabled={isPaymentClicked}
+          className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
+            isPaymentClicked ? "bg-gray-500" : ""
+          }`}
+        >
+          Confirm
+        </button>
+        <button
+          onClick={handlePaymentClick}
+          className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
+            isPaymentClicked ? "clicked-class" : ""
+          }`}
+        >
+          Payment
+        </button>
+        <button
+          onClick={handleCancelTransactionClick}
+          className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
+        >
+          Cancel Transaction
+        </button>
+
+        <button
+          onClick={handleNextTransactionClick}
           className="bg-blue-500 hover:bg-blue-700 text-white w-full h-12 rounded"
         >
-          {number}
+          Next Transaction
         </button>
-      ))}
-      <button
-        onClick={handleBackspaceClick}
-        className="bg-yellow-500 hover:bg-yellow-700 text-white w-full h-12 rounded"
-      >
-        Backspace
-      </button>
-      <button
-        onClick={handleClearClick}
-        className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
-      >
-        Clear
-      </button>
-      <button
-        onClick={handleConfirmClick}
-        disabled={isPaymentClicked}
-        className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
-          isPaymentClicked ? "bg-gray-500" : ""
-        }`}
-      >
-        Confirm
-      </button>
-      <button
-        onClick={handlePaymentClick}
-        className={`bg-green-500 hover:bg-green-700 text-white w-full h-12 rounded ${
-          isPaymentClicked ? "clicked-class" : ""
-        }`}
-      >
-        Payment
-      </button>
-      <button
-        onClick={handleCancelTransactionClick}
-        className="bg-red-500 hover:bg-red-700 text-white w-full h-12 rounded"
-      >
-        Cancel Transaction
-      </button>
-
-      <button
-        onClick={handleNextTransactionClick}
-        className="bg-blue-500 hover:bg-blue-700 text-white w-full h-12 rounded"
-      >
-        Next Transaction
-      </button>
+      </div>
     </div>
   );
 }

@@ -65,7 +65,7 @@ function Home({ staffName }) {
       0
     );
     try {
-      const response = await axios.post("http://localhost:3001/api/purchase", {
+      const response = await axios.post("http://localhost:3001/api/purchases", {
         items: items,
         totalPrice: totalPrice,
         purchaseDate: new Date(),

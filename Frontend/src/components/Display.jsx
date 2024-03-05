@@ -58,7 +58,7 @@ function Display({
   return (
     <div className="bg-gray-800 text-white p-4 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Point of Sale System</h2>
+        <h2 className="text-2xl font-bold">JON&apos;S FRUIT STALL</h2>
         <button
           onClick={() => setAreItemsButtons(!areItemsButtons)}
           className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"

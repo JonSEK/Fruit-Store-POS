@@ -17,6 +17,7 @@ function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
 
   const location = useLocation();
   const isInventoryPage = location.pathname === "/inventory";
+  const isSalesPage = location.pathname === "/sales";
 
   return (
     <header className="flex justify-between items-center p-4">
@@ -32,19 +33,21 @@ function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
           hour12: true,
         })}
       </p>
-      <nav>
-        <Link
-          to={isInventoryPage ? "/" : "/inventory"}
-          className="text-blue-500 hover:text-blue-800"
-        >
-          {isInventoryPage ? "Home" : "Inventory"}
-        </Link>
-      </nav>
-      <Login
-        onLogin={onLogin}
-        onLogout={onLogout}
-        isLoggedIn={isLoggedIn}
-      />
+
+      <Link
+        to={isInventoryPage ? "/" : "/inventory"}
+        className="text-blue-500 hover:text-blue-800"
+      >
+        {isInventoryPage ? "Home" : "Inventory"}
+      </Link>
+      <Link
+        to={isSalesPage ? "/" : "/sales"}
+        className="text-blue-500 hover:text-blue-800"
+      >
+        {isSalesPage ? "Home" : "Sales"}
+      </Link>
+
+      <Login onLogin={onLogin} onLogout={onLogout} isLoggedIn={isLoggedIn} />
     </header>
   );
 }
