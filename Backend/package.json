@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build-frontend": "cd ../Frontend && npm run build"
+    "build-frontend": "cd ../Frontend && npm i --production=false && npm run build"
   },
   "author": "",
   "license": "ISC",
