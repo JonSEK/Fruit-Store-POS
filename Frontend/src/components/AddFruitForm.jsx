@@ -1,34 +1,59 @@
 import { useState } from "react";
 import axios from "axios";
 
+// Custom hook for form inputs
+// This hook manages the state of an input field
+function useFormInput(initialValue) {
+  // Initialize state with the initial value
+  const [value, setValue] = useState(initialValue);
+
+  // Handle changes to the input field
+  function handleChange(e) {
+    // Update state with the new value
+    setValue(e.target.value);
+  }
+
+  // Return the current value and the change handler
+  return {
+    value,
+    onChange: handleChange,
+  };
+}
+
+// Component for adding a new fruit
 function AddFruitForm({ setInventory }) {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  // Use the custom hook for the name and price inputs
+  const name = useFormInput("");
+  const price = useFormInput("");
 
   // Handle form submission
   const handleSubmit = (event) => {
+    // Prevent the default form submission behavior
     event.preventDefault();
 
-    // Create fruit object
+    // Create a new fruit object
     const fruit = {
-      name,
-      price: Number(price), // Convert price to number
+      name: name.value,
+      price: Number(price.value),
     };
 
-    // Send POST request to server
+    // Send a POST request to the server
     axios
       .post("http://localhost:3001/api/fruits", fruit)
       .then((res) => {
-        // Update local inventory state
+        // Update the inventory with the new fruit
         setInventory((prevInventory) => [...prevInventory, res.data]);
-
-        // Clear form fields
-        setName("");
-        setPrice("");
+        // Reset the form fields
+        name.onChange({ target: { value: "" } });
+        price.onChange({ target: { value: "" } });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        // Log any errors to the console
+        console.error(err);
+      });
   };
 
+  // Render the form
   return (
     <form
       onSubmit={handleSubmit}
@@ -44,24 +69,19 @@ function AddFruitForm({ setInventory }) {
             className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            {...name}
             required
           />
         </div>
         <div>
-          <label
-            className="block font-bold mb-2"
-            htmlFor="price"
-          >
+          <label className="block font-bold mb-2" htmlFor="price">
             Price
           </label>
           <input
             className="shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="price"
             type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            {...price}
             required
           />
         </div>
@@ -76,4 +96,5 @@ function AddFruitForm({ setInventory }) {
   );
 }
 
+// Export the component
 export default AddFruitForm;
