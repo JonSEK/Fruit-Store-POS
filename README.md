@@ -1,12 +1,13 @@
-# Jon's Fruit Stall
+# Fruit Store POS
 
 This project is a Point of Sale (POS) system for a fruit stall. It consists of a frontend built with React and Tailwind CSS and a backend built with Node, Express and MongoDB.
 
 
 ## Live Demo
 
-The application is deployed at and can be accessed at [https://fruit-store-pos.onrender.com](https://fruit-store-pos.onrender.com)
+The application is deployed and can be accessed at [https://fruit-store-pos.onrender.com](https://fruit-store-pos.onrender.com).
 
+*Please note that the application is deployed on a free instance at Render, which will spin down after a period of inactivity. This can cause a delay of 50 seconds or more for the initial request after a period of inactivity. Subsequent requests will be handled at normal speed until the application spins down again due to inactivity.*
 
 ## Features
 
