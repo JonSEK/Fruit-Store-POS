@@ -82,35 +82,31 @@ function Home({ staffName }) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-1">
       <div className="flex-1">
-        <FruitList onFruitSelected={handleFruitSelected} />
+        <Display
+          selectedFruit={selectedFruit}
+          quantity={quantity}
+          pricePerUnit={pricePerUnit}
+          items={items}
+          setItems={setItems}
+          collected={collected}
+          isPaymentClicked={isPaymentClicked}
+          setIsPaymentClicked={setIsPaymentClicked}
+        />
       </div>
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1">
-          <Display
-            selectedFruit={selectedFruit}
-            quantity={quantity}
-            pricePerUnit={pricePerUnit}
-            items={items}
-            setItems={setItems}
-            collected={collected}
-            isPaymentClicked={isPaymentClicked}
-            setIsPaymentClicked={setIsPaymentClicked}
-          />
-        </div>
-        <div className="flex-1">
-          <NumberPad
-            onQuantitySelected={handleQuantitySelected}
-            onConfirm={handleConfirm}
-            onClear={handleClear}
-            onCancelTransaction={handleCancelTransaction}
-            setIsPaymentClicked={setIsPaymentClicked}
-            isPaymentClicked={isPaymentClicked}
-            onCollectedChange={handleCollectedChange}
-            onNextTransaction={handleNextTransaction}
-          />
-        </div>
+      <div className="flex flex-1 flex-col justify-between">
+        <FruitList onFruitSelected={handleFruitSelected} />
+        <NumberPad
+          onQuantitySelected={handleQuantitySelected}
+          onConfirm={handleConfirm}
+          onClear={handleClear}
+          onCancelTransaction={handleCancelTransaction}
+          setIsPaymentClicked={setIsPaymentClicked}
+          isPaymentClicked={isPaymentClicked}
+          onCollectedChange={handleCollectedChange}
+          onNextTransaction={handleNextTransaction}
+        />
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ function App() {
   };
 
   return (
+    <div className="flex flex-col h-screen">
       <Router>
         <Header
           isLoggedIn={isLoggedIn}
@@ -27,6 +28,7 @@ function App() {
           onLogin={handleLogin}
           onLogout={handleLogout}
         />
+
         <Routes>
           <Route
             path="/"
@@ -36,6 +38,7 @@ function App() {
           <Route path="/sales" element={<Sales />} />
         </Routes>
       </Router>
+    </div>
   );
 }
 

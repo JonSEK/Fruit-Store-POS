@@ -60,7 +60,7 @@ function NumberPad({
   };
 
   return (
-    <div className="bg-slate-300 flex flex-col items-start absolute bottom-0 rounded-lg w-1/2">
+    <div className="bg-slate-300 flex flex-col items-start rounded-lg ">
       <div className="grid grid-cols-3 gap-2 p-4 w-full">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."].map((number) => (
           <button

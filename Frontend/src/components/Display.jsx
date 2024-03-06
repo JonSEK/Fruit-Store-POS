@@ -56,43 +56,43 @@ function Display({
   );
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg flex-grow">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">JON&apos;S FRUIT STALL</h2>
-        <button
-          onClick={() => setAreItemsButtons(!areItemsButtons)}
-          className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
-        >
-          {areItemsButtons ? "Save" : "Change Qty"}
-        </button>
+    <div className="bg-gray-800 text-white p-4 rounded-lg h-full flex flex-col justify-between">
+      <div className="">
+        <div className="flex justify-between items-center mb-4 ">
+          <h2 className="text-2xl font-bold">JON&apos;S FRUIT STALL</h2>
+          <button
+            onClick={() => setAreItemsButtons(!areItemsButtons)}
+            className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded "
+          >
+            {areItemsButtons ? "Save" : "Change Qty"}
+          </button>
+        </div>
+        <div className="flex justify-between text-xl font-bold mb-2 ">
+          <div className="w-1/4 text-left">Item</div>
+          <div className="w-1/4 text-center pr-10">Quantity</div>
+          <div className="w-1/4 text-center pr-10">Price</div>
+          <div className="w-1/4 text-right pr-5">Total</div>
+        </div>
+        <div className="pr-5 overflow-auto max-h-[600px]">
+          {isEmpty ? (
+            <Row name="" pricePerUnit={0} quantity={0} />
+          ) : (
+            items
+              .filter((item) => item.name)
+              .map((item) => (
+                <Row key={item.id} {...item} selectedFruit={selectedFruit} />
+              ))
+          )}
+          {!isPaymentClicked && selectedFruit && (
+            <Row
+              name={selectedFruit}
+              pricePerUnit={pricePerUnit}
+              quantity={quantity}
+              selectedFruit={selectedFruit}
+            />
+          )}
+        </div>
       </div>
-      <div className="flex justify-between text-xl font-bold mb-2">
-        <div className="w-1/4 text-left">Item</div>
-        <div className="w-1/4 text-center pr-10">Quantity</div>
-        <div className="w-1/4 text-center pr-10">Price</div>
-        <div className="w-1/4 text-right pr-5">Total</div>
-      </div>
-      <div className="max-h-40 overflow-auto pr-5">
-        {isEmpty ? (
-          <Row name="" pricePerUnit={0} quantity={0} />
-        ) : (
-          items
-            .filter((item) => item.name)
-            .map((item) => (
-              <Row key={item.id} {...item} selectedFruit={selectedFruit} />
-            ))
-        )}
-
-        {!isPaymentClicked && selectedFruit && (
-          <Row
-            name={selectedFruit}
-            pricePerUnit={pricePerUnit}
-            quantity={quantity}
-            selectedFruit={selectedFruit}
-          />
-        )}
-      </div>
-
       <div className="text-xl font-bold">
         <div className="flex justify-end mb-2 mt-4">
           <div className="w-3/4 text-right pr-5 ">Grand Total</div>
