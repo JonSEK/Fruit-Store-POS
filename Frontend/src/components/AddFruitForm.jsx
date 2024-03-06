@@ -96,5 +96,4 @@ function AddFruitForm({ setInventory }) {
   );
 }
 
-// Export the component
 export default AddFruitForm;

@@ -3,10 +3,11 @@ import axios from "axios";
 import AddFruitForm from "./AddFruitForm";
 
 function Inventory() {
+  // State variables for inventory and edit mode
   const [inventory, setInventory] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
 
-  // Fetch inventory from server when component mounts
+  // Fetch inventory from API when component mounts
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/fruits")
@@ -14,7 +15,7 @@ function Inventory() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Delete fruit from server and update local state
+  // Handler for deleting a fruit
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost:3001/api/fruits/${id}`)
@@ -24,7 +25,7 @@ function Inventory() {
       .catch((err) => console.error(err));
   };
 
-  // Update fruit on server and local state
+  // Handler for updating a fruit
   const handleUpdate = (id, updatedFruit) => {
     axios
       .put(`http://localhost:3001/api/fruits/${id}`, updatedFruit)
@@ -36,12 +37,13 @@ function Inventory() {
       .catch((err) => console.error(err));
   };
 
-  // Save all changes and exit edit mode
+  // Handler for saving all changes
   const handleSaveAll = () => {
     inventory.forEach((fruit) => handleUpdate(fruit._id, fruit));
     setIsEditMode(false);
   };
 
+  // Render AddFruitForm and inventory table
   return (
     <div className="w-full max-w-md mx-auto mt-6">
       <AddFruitForm setInventory={setInventory} />

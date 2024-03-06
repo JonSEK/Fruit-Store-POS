@@ -5,6 +5,7 @@ import NumberPad from "./NumberPad";
 import axios from "axios";
 
 function Home({ staffName }) {
+  // State variables for selected fruit, quantity, price per unit, selected fruit ID, items in the cart, collected amount, and payment status
   const [selectedFruit, setSelectedFruit] = useState("Select item");
   const [quantity, setQuantity] = useState(0);
   const [pricePerUnit, setPricePerUnit] = useState(0);
@@ -13,16 +14,19 @@ function Home({ staffName }) {
   const [collected, setCollected] = useState(0);
   const [isPaymentClicked, setIsPaymentClicked] = useState(false);
 
+  // Handler for when a fruit is selected
   const handleFruitSelected = (fruit) => {
     setSelectedFruit(fruit.name);
     setPricePerUnit(fruit.price);
     setSelectedFruitId(fruit._id);
   };
 
+  // Handler for when a quantity is selected
   const handleQuantitySelected = (quantity) => {
     setQuantity(quantity);
   };
 
+  // Handler for when the confirm button is clicked
   const handleConfirm = () => {
     if (selectedFruit !== "Select item" && quantity > 0) {
       const newItem = {
@@ -40,12 +44,14 @@ function Home({ staffName }) {
     }
   };
 
+  // Handler for when the clear button is clicked
   const handleClear = () => {
     setSelectedFruit("Select item");
     setQuantity(0);
     setPricePerUnit(0);
   };
 
+  // Handler for when the cancel transaction button is clicked
   const handleCancelTransaction = () => {
     setItems([]);
     setSelectedFruit("Select item");
@@ -55,10 +61,12 @@ function Home({ staffName }) {
     setCollected(0);
   };
 
+  // Handler for when the collected amount changes
   const handleCollectedChange = (newCollected) => {
     setCollected(newCollected);
   };
 
+  // Handler for when the next transaction button is clicked
   const handleNextTransaction = async () => {
     const totalPrice = items.reduce(
       (total, item) => total + item.quantity * item.pricePerUnit,
@@ -81,6 +89,7 @@ function Home({ staffName }) {
     handleCancelTransaction();
   };
 
+  // Render Display, FruitList, and NumberPad components
   return (
     <div className="flex flex-1">
       <div className="flex-1">
@@ -111,4 +120,5 @@ function Home({ staffName }) {
     </div>
   );
 }
+
 export default Home;

@@ -5,20 +5,17 @@ import Login from "./Login";
 function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
   const [currentTime, setCurrentTime] = useState(new Date());
 
+  // Update 'currentTime' every second
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
-  const location = useLocation();
-  const isInventoryPage = location.pathname === "/inventory";
-  const isSalesPage = location.pathname === "/sales";
+  const { pathname } = useLocation();
+  const isInventoryPage = pathname === "/inventory";
+  const isSalesPage = pathname === "/sales";
 
+  // Render header with current time, navigation links, and login status
   return (
     <header className="flex justify-between items-center p-4">
       <h1 className="text-2xl">Staff: {isLoggedIn ? staffName : "Guest"}</h1>
@@ -33,7 +30,6 @@ function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
           hour12: true,
         })}
       </p>
-
       <Link
         to={isInventoryPage ? "/" : "/inventory"}
         className="text-blue-500 hover:text-blue-800"
@@ -46,7 +42,6 @@ function Header({ isLoggedIn, staffName, onLogin, onLogout }) {
       >
         {isSalesPage ? "Home" : "Sales"}
       </Link>
-
       <Login onLogin={onLogin} onLogout={onLogout} isLoggedIn={isLoggedIn} />
     </header>
   );

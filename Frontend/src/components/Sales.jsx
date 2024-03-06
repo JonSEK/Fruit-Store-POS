@@ -4,12 +4,13 @@ import axios from "axios";
 function Sales() {
   const [items, setItems] = useState([]);
 
+  // Fetch purchases from API and flatten into items on component mount
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/purchases")
       .then((response) => {
-        const purchases = response.data;
-        const items = purchases.flatMap((purchase) =>
+        // Map each purchase into its items, adding purchase details to each item
+        const items = response.data.flatMap((purchase) =>
           purchase.items.map((item) => ({
             ...item,
             totalPrice: purchase.totalPrice,
@@ -24,11 +25,13 @@ function Sales() {
       });
   }, []);
 
+  // Calculate total sales
   const total = items.reduce(
     (sum, item) => sum + item.quantity * item.pricePerUnit,
     0
   );
 
+  // Render sales log
   return (
     <div>
       <h1 className="px-4 pb-4 text-2xl font-bold text-center">SALES LOG</h1>

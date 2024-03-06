@@ -1,28 +1,22 @@
 function Login({ onLogin, onLogout, isLoggedIn }) {
-  const handleLogin = () => {
-    const name = prompt("Enter your name");
-    onLogin(name);
+  // Handler for login and logout actions
+  const handleAction = () => {
+    if (isLoggedIn) {
+      onLogout();
+    } else {
+      const name = prompt("Enter your name");
+      onLogin(name);
+    }
   };
 
-  const handleLogout = () => {
-    onLogout();
-  };
-
-  return isLoggedIn ? (
+  // Render login or logout button based on isLoggedIn state
+  return (
     <button
       type="button"
       className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-      onClick={handleLogout}
+      onClick={handleAction}
     >
-      Log out
-    </button>
-  ) : (
-    <button
-      type="button"
-      className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-      onClick={handleLogin}
-    >
-      Log in
+      {isLoggedIn ? "Log out" : "Log in"}
     </button>
   );
 }
