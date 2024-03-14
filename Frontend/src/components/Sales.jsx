@@ -7,7 +7,7 @@ function Sales() {
   // Fetch purchases from API and flatten into items on component mount
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/purchases")
+      .get(`${import.meta.env.VITE_APP_API_URL}/api/purchases`)
       .then((response) => {
         // Map each purchase into its items, adding purchase details to each item
         const items = response.data.flatMap((purchase) =>

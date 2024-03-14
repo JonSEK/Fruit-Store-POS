@@ -8,7 +8,9 @@ function FruitList({ onFruitSelected }) {
   // Fetch fruits data from API on component mount
   useEffect(() => {
     const fetchFruits = async () => {
-      const response = await axios.get("http://localhost:3001/api/fruits");
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/api/fruits`
+      );
       setFruits(response.data);
     };
     fetchFruits();

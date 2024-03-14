@@ -10,7 +10,7 @@ function Inventory() {
   // Fetch inventory from API when component mounts
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/fruits")
+      .get(`${import.meta.env.VITE_APP_API_URL}/api/fruits`)
       .then((res) => setInventory(res.data))
       .catch((err) => console.error(err));
   }, []);

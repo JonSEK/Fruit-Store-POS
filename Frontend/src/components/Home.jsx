@@ -73,12 +73,15 @@ function Home({ staffName }) {
       0
     );
     try {
-      const response = await axios.post("http://localhost:3001/api/purchases", {
-        items: items,
-        totalPrice: totalPrice,
-        purchaseDate: new Date(),
-        staffName: staffName,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/purchases`,
+        {
+          items: items,
+          totalPrice: totalPrice,
+          purchaseDate: new Date(),
+          staffName: staffName,
+        }
+      );
 
       if (response.status === 201) {
         console.log("Purchase saved successfully");

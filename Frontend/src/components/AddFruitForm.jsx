@@ -39,7 +39,7 @@ function AddFruitForm({ setInventory }) {
 
     // Send a POST request to the server
     axios
-      .post("http://localhost:3001/api/fruits", fruit)
+      .post(`${import.meta.env.VITE_APP_API_URL}/api/fruits`, fruit)
       .then((res) => {
         // Update the inventory with the new fruit
         setInventory((prevInventory) => [...prevInventory, res.data]);
