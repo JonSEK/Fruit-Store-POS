@@ -18,7 +18,7 @@ function Inventory() {
   // Handler for deleting a fruit
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/api/fruits/${id}`)
+      .delete(`${import.meta.env.VITE_APP_API_URL}/api/fruits/${id}`)
       .then(() =>
         setInventory((prev) => prev.filter((fruit) => fruit._id !== id))
       )
@@ -28,7 +28,7 @@ function Inventory() {
   // Handler for updating a fruit
   const handleUpdate = (id, updatedFruit) => {
     axios
-      .put(`http://localhost:3001/api/fruits/${id}`, updatedFruit)
+      .put(`${import.meta.env.VITE_APP_API_URL}/api/fruits/${id}`, updatedFruit)
       .then((res) =>
         setInventory((prev) =>
           prev.map((fruit) => (fruit._id === id ? res.data : fruit))
